@@ -1,0 +1,9 @@
+If the program was run with one command-line argument then
+  If the characters are alphabet (Iterate argument to make sure all characters are alphabet)
+    Prompt user input for plaintext
+    Cipherize a text (Iterate over each character of the plaintext to rotate(cipher)/not)
+    Print the result/chipered text
+    Print Newline
+  Else Print "Usage: ./vigenere keyword"
+Else 
+  Print "Usage: ./vigenere keyword"

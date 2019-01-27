@@ -1,0 +1,11 @@
+If the program was run with one command-line argument then
+  If the characters are digit (Iterate argument to make sure all characters are digits)
+    Prompt user input for plaintext
+    Cipherize a text (Iterate over each character of the plaintext to rotate(cipher)/not)
+    Print the result/chipered text
+    Print Newline
+  Else Print "Usage: ./caesar key"
+Else 
+  Print "Usage: ./caesar key"
+  
+  
