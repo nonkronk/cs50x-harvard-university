@@ -46,7 +46,7 @@ unsigned int hash(const char *word)
 
     // Combined with Google Jump Consistent Hash Algorithm
     // https://github.com/delaemon/c-jump
-    return jumphash(farmed, N-1);
+    return jumphash(farmed, N - 1);
 }
 
 // Loads dictionary into memory, returning true if successful else false
@@ -62,7 +62,7 @@ bool load(const char *dictionary)
         return false;
     }
     // Populate each word in dictionary
-    while(fscanf(file, "%s", buffer) != EOF)
+    while (fscanf(file, "%s", buffer) != EOF)
     {
         // Create a new node
         node *n = malloc(sizeof(node));
