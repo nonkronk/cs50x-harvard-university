@@ -3,22 +3,24 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <strings.h>
 #include <string.h>
 #include "dictionary.h"
-#include "farmhash-c.h"
+//#include "farmhash-c.h"
+#include <ctype.h>
 
 // Represents a node in a hash table
 typedef struct node
 {
     char word[LENGTH + 1];
     struct node *next;
-}
-node;
+} node;
 
 int dict_size = 0;
 
 // Number of buckets in hash table
-const unsigned int N = INT32_MAX - 1;
+// My local post code :p (Indonesia)
+const unsigned int N = 40379;
 
 // Hash table
 node *table[N];
@@ -26,12 +28,20 @@ node *table[N];
 // Returns true if word is in dictionary else false
 bool check(const char *word)
 {
-    unsigned int hashed = hash(word);
-    for (node *cursor = table[hashed]; cursor != NULL; cursor = cursor->next)
+    unsigned int key = hash(word);
+    if (table[key] != NULL)
     {
-        if (strcasecmp(cursor->word, word) == 0)
+        node *cursor = table[key];
+        while (cursor != NULL)
         {
-            return true;
+            if (strcasecmp(cursor->word, word) == 0)
+            {
+                return true;
+            }
+            else
+            {
+                cursor = cursor->next;
+            }
         }
     }
     return false;
@@ -40,13 +50,25 @@ bool check(const char *word)
 // Hashes word to a number
 unsigned int hash(const char *word)
 {
-    // Implements Google Farm Hash Algorithm
-    // https://github.com/uxcn/farmhash-c
-    uint64_t farmed = farmhash(word, strlen(word));
+    // // Implements Google Farm Hash Algorithm
+    // // https://github.com/uxcn/farmhash-c
+    // uint64_t farmed = farmhash(word, strlen(word));
 
-    // Combined with Google Jump Consistent Hash Algorithm
-    // https://github.com/delaemon/c-jump
-    return jumphash(farmed, N - 1);
+    // // Combined with Google Jump Consistent Hash Algorithm
+    // // https://github.com/delaemon/c-jump
+    // return jumphash(farmed, N - 1);
+
+    // Hash function djb2 by Dan Bernstein
+    // http://www.cse.yorku.ca/~oz/hash.html
+    unsigned long hash = 5381;
+    int c;
+
+    while ((c = *word++))
+    {
+        hash = ((hash << 5) + hash) + tolower(c);
+    }
+
+    return hash % N;
 }
 
 // Loads dictionary into memory, returning true if successful else false
@@ -69,26 +91,20 @@ bool load(const char *dictionary)
         // Just to be safe
         if (n == NULL)
         {
+            fclose(file);
             return false;
         }
         // Add word in to linked list
         strcpy(n->word, buffer);
 
         // Hashing the word
-        int index = hash(buffer);
-        
-        if (table[index] == NULL)
-        {
-            // Set "the head"
-            table[index] = n;
-        }
-        else
-        {
-            // Set new node to be first element
-            n->next = table[index];
-            // Reset "head" to be first element again
-            table[index] = n;
-        }
+        unsigned int index = hash(buffer);
+
+        // Set new node to be first element
+        n->next = table[index];
+        // Reset "head" to be first element again
+        table[index] = n;
+
         // Count words in the dict
         dict_size++;
     }
@@ -105,40 +121,34 @@ unsigned int size(void)
 // Unloads dictionary from memory, returning true if successful else false
 bool unload(void)
 {
-    
-    node *temp;
-    node *cursor;
-
+    // Iterate through all bucket
     for (int i = 0; i < N; i++)
     {
-        if (table[i] != NULL)
+        node *cursor = table[i];
+
+        // Traverse linked list
+        while (cursor != NULL)
         {
-            // If only 1 node free it
-            cursor = table[i];
-            while (cursor != NULL)
-            {
-                temp = cursor->next;
-                cursor = temp;
-            }
-            // free last node in list
-            temp = cursor;
-            free(temp);
+            node *tmp = cursor;
+            cursor = cursor->next;
+            // Freeing node
+            free(tmp);
         }
     }
     return true;
 }
 
-// Google Jump Consistent Hash Algorithm
-int jumphash(unsigned long long key, int buckets)
-{
-    long long b = -1;
-    long long j = 0;
+// // Google Jump Consistent Hash Algorithm
+// int jumphash(unsigned long long key, int buckets)
+// {
+//     long long b = -1;
+//     long long j = 0;
 
-    while (j < ((long long)buckets))
-    {
-        b = j;
-        key = key * 2862933555777941757 + 1;
-        j = ((long long)(((double)(b + 1)) * (((double)(((long long)1) << 31)) / ((double)((key >> 33) + 1)))));
-    }
-    return (int)b;
-}
+//     while (j < ((long long)buckets))
+//     {
+//         b = j;
+//         key = key * 2862933555777941757 + 1;
+//         j = ((long long)(((double)(b + 1)) * (((double)(((long long)1) << 31)) / ((double)((key >> 33) + 1)))));
+//     }
+//     return (int)b;
+// }

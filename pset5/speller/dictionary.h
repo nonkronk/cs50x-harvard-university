@@ -15,6 +15,6 @@ unsigned int hash(const char *word);
 bool load(const char *dictionary);
 unsigned int size(void);
 bool unload(void);
-int jumphash(unsigned long long key, int buckets);
+// int jumphash(unsigned long long key, int buckets);
 
 #endif // DICTIONARY_H
