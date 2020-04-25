@@ -2,3 +2,5 @@ pset5/speller/dictionary.o
 pset5/speller/farmhash-c.o
 pset5/speller/speller.o
 pset5/speller/speller
+pset5/murmurhash.c
+pset5/murmurhash.h
