@@ -6,7 +6,7 @@ while True:
     height = input("Height: ")
     if re.match("^([1-8])", height) is not None:
         height = int(height)
-        breakls
+        break
 
 # Builds mario blocks
 for i in range(height):
