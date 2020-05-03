@@ -4,3 +4,4 @@ pset5/speller/speller.o
 pset5/speller/speller
 pset5/murmurhash.c
 pset5/murmurhash.h
+.DS_Store
