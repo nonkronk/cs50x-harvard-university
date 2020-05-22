@@ -7,8 +7,8 @@ Just to keep track all my learning progress on [Harvard University CS50x 2020 On
 ### CS50’s (free) OpenCourseWare - Introduction to Computer Science
 https://online-learning.harvard.edu/course/cs50-introduction-computer-science 
 
-Educational purpose only.\
-Enjoy!
+An investment in knowledge pays the best interest.\
+Keep learning!
 
 
 
