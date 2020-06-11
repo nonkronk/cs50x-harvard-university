@@ -1,0 +1,192 @@
+html,
+body {
+    margin:0;
+    height: 100%;
+    background: #a51c30;
+}
+
+/*  Main ui */
+#app {
+    font-family: sans-serif;
+    color: black;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100%;
+}
+
+#footer {
+    text-align: center;
+    color: black;
+    margin-bottom: 0 0 10rem;
+    -webkit-font-smoothing: antialiased;
+}
+
+/*  Default title styling */
+h1,
+h2,
+h3,
+h4,
+h5 {
+    margin: 0;
+    font-weight: bold;
+    line-height: 1;
+}
+
+/*  Default header padding */
+header {
+    padding: 2rem 0;
+}
+
+/*  Styling Main title
+    Add flexible black background color */
+header h1 {
+    display: table;
+    margin: 0px auto 0px auto;
+    font-size: 6rem;
+    font-weight: bold;
+    color: #a51c30;
+    text-align: center; 
+    padding: 1rem;
+    background-color: black;
+}
+
+/*  Styling sub title */
+header p {
+    text-align: center; 
+    font-size: 1.4rem;
+    margin: 1.3rem 0 0;
+}
+
+/*  Styling CS50x text */
+* p span {
+    padding: 0.2rem;
+    font-weight: bold;
+    color: #a51c30;
+    background-color: black;
+}
+
+/*  In paragraph links in black */
+p a {
+    color: black;
+}
+
+/*  In h3 links in harvard-red */
+h3 a {
+    color: #a51c30;
+}
+
+/*  CS50x harvard-red */
+span a {
+    color: #a51c30;
+}
+
+/*  links hover color */
+a:hover {
+  color: white;
+}
+
+/*  Title Formatting */
+h1 {
+  text-align: center;
+  font-size: 2rem;
+}
+h2 {
+  font-size: 1.3rem;
+}
+h3 {
+  font-size: 1rem;
+}
+
+p {
+  font-size: 1rem;
+  line-height: 1.4;
+  margin: 0.5rem 0;
+}
+
+/*  Increase padding on big screen */
+@media (min-width: 1024px) {
+    header.container {
+        padding: 6rem 0;
+    }
+}
+
+/*  Add some space (useful on tight screen) */
+header.container,
+div.container {
+    margin: 0 auto;
+    width: 95%;
+}
+
+/*  Increase container width on biggest screen */
+@media (min-width: 1200px) {
+  header.container,
+  div.container {
+    width: 1024px;
+  }
+}
+
+/*  Styling on bigger screen */
+@media (min-width: 1024px) {
+  header.container,
+  div.container {
+    width: 960px;
+  }
+  h1 {
+    font-size: 8rem;
+  }
+  h2 {
+    font-size: 2rem;
+  }
+  h3 {
+    font-size: 1.5rem;
+  }
+}
+
+svg {
+  transform: rotate(-90deg);
+  display: block;
+  margin: 0;
+  width: 100%;
+  height: auto;
+}
+svg circle {
+  fill: none;
+  stroke-width: 50px;
+}
+svg circle.prog {
+  will-change: auto;
+  stroke: #000;
+}
+svg circle.bg {
+  stroke: rgba(0, 0, 0, 0.1);
+}
+
+.progres {
+  display: flex;
+  flex-wrap: wrap;
+  text-align: left;
+  margin: 0 0 3rem;
+  align-content: center;
+  justify-content: center;
+}
+.progres .left {
+  width: 40px;
+}
+.progres .left,
+.progres .right {
+  flex-direction: column;
+  justify-content: center;
+}
+.progres .right {
+  flex: 1;
+  margin-left: 0.5rem;
+}
+.progres.dark {
+  text-align: center;
+  background: black;
+  color: #a51c30;
+  padding: 0.5rem;
+}
+
+.row.foot {
+  text-align: center;
+}
